@@ -43,7 +43,7 @@ export function Hero() {
         </h1>
 
         <p className="text-xl sm:text-2xl text-muted-foreground mb-8 text-balance max-w-2xl mx-auto">
-          Backend & Mobile Developer – Experienced in building reliable backend systems, seamless APIs, and
+          Web & Mobile Developer – Experienced in building reliable backend systems, seamless APIs, and
           cross-platform mobile applications. Focused on transforming complex challenges into efficient, scalable
           solutions.
         </p>
