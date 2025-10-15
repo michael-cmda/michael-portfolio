@@ -31,8 +31,6 @@ export function Portfolio() {
       images: [
         "/assessment-hr-dashboard.png",
         "/assessment-exam-interface.png",
-        "/assessment-admin-interface.png",
-        "/assessment-questionnaire.png",
       ],
       technologies: ["Laravel", "PHP", "MySQL", "Laragon", "Audio Processing", "Data Privacy Compliance"],
       featured: true,
