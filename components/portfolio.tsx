@@ -17,7 +17,7 @@ export function Portfolio() {
     {
       title: "Employee Assistance & Support System",
       description:
-        "Development of a comprehensive internal support system at NextBPO Solutions for production employees to request assistance. Built scalable backend architecture with Laravel and MySQL to handle IT support tickets, administrative requests, utility management, and employee leave applications. Implemented role-based access control, automated workflow routing, and real-time status tracking that streamlined internal operations and improved response times by 40%.",
+        "Development of a comprehensive internal support system at NextBPO Solutions for production employees to request assistance. Built scalable backend architecture with Laravel and MySQL to handle IT support tickets, administrative requests, utility management, and employee leave applications. Implemented role-based access control, automated workflow routing, and real-time status tracking that streamlined internal operations.",
       image: "/ticketing-system-login.png",
       images: ["/ticketing-system-login.png"],
       technologies: ["Laravel", "PHP", "MySQL", "REST APIs", "Role-Based Access Control"],
