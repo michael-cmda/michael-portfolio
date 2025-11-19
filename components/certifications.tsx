@@ -75,6 +75,15 @@ export function Certifications() {
       image: "/certifications/php-beginners-cert.jpg",
       description: "PHP fundamentals with hands-on CMS project development",
     },
+     {
+      title: "The Ultimate React Course 2025: React, Next.js, Redux & More",
+      issuer: "Udemy",
+      date: "August 2, 2024",
+      duration: "84 hours",
+      type: "Course Completion",
+      image: "/certifications/react-cert.jpg",
+      description: "Learn React, Next.js, Redux, and modern web development",
+    },
     {
       title: "Yii 2: From Beginner to Expert",
       issuer: "Udemy",
