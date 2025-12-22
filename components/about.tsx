@@ -20,7 +20,7 @@ const timeline = [
   },
   {
     date: "2024-06",
-    month: "June",
+    month: "May",
     year: "2024",
     title: "Backend Developer",
     company: "Next BPO Solutions Inc.",
@@ -28,9 +28,9 @@ const timeline = [
       "Built internal systems including admin dashboards, examination platforms, and team communication tools using PHP, Laravel, and JavaScript.",
   },
   {
-    date: "2024-02",
-    month: "February",
-    year: "2024",
+    date: "2023-11",
+    month: "November",
+    year: "2023",
     title: "Backend Developer Intern",
     company: "Next BPO Solutions Inc.",
     description:
