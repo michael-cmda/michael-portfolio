@@ -1,18 +1,18 @@
-"use client"
+"use client";
 
-import { useState, useRef } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { ProjectModal } from "./project-modal"
-import { Award, Calendar, Clock } from "lucide-react"
-import { motion, useInView } from "framer-motion"
+import { useState, useRef } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { ProjectModal } from "./project-modal";
+import { Award, Calendar, Clock } from "lucide-react";
+import { motion, useInView } from "framer-motion";
 
 export function Certifications() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const [selectedCert, setSelectedCert] = useState<any>(null)
+  const [selectedCert, setSelectedCert] = useState<any>(null);
 
   const certifications = [
     {
@@ -21,7 +21,8 @@ export function Certifications() {
       date: "July 12, 2023",
       type: "Professional Certification",
       image: "/certifications/network-security-cert.png",
-      description: "Certified in network security fundamentals and best practices",
+      description:
+        "Certified in network security fundamentals and best practices",
     },
     {
       title: "Networking Specialist",
@@ -29,7 +30,8 @@ export function Certifications() {
       date: "December 17, 2022",
       type: "Professional Certification",
       image: "/certifications/networking-cert.png",
-      description: "Comprehensive networking certification covering protocols and infrastructure",
+      description:
+        "Comprehensive networking certification covering protocols and infrastructure",
     },
     {
       title: "National Certificate II - Computer Systems Servicing",
@@ -37,7 +39,8 @@ export function Certifications() {
       date: "October 27, 2023",
       type: "National Certification",
       image: "/certifications/tesda-cert.png",
-      description: "Government-issued certification for computer systems servicing competency",
+      description:
+        "Government-issued certification for computer systems servicing competency",
     },
     {
       title: "On-The-Job Training Certificate",
@@ -49,13 +52,24 @@ export function Certifications() {
       description: "Completed comprehensive IT department training program",
     },
     {
+      title: "Data Analytics Masters 2025 - From Basics To Advanced",
+      issuer: "Udemy",
+      date: "Dec 23, 2025",
+      duration: "59 hours",
+      type: "Course Completion",
+      image: "/certifications/data-cert.jpg",
+      description:
+        "Completed Data Analytics Masters 2025 program covering fundamentals to advanced analytics techniques",
+    },
+    {
       title: "The Complete 2024 Web Development Bootcamp",
       issuer: "Udemy",
       date: "October 15, 2024",
       duration: "61.5 hours",
       type: "Course Completion",
       image: "/certifications/web-dev-bootcamp-cert.jpg",
-      description: "Comprehensive web development bootcamp covering full-stack technologies",
+      description:
+        "Comprehensive web development bootcamp covering full-stack technologies",
     },
     {
       title: "Master Laravel & PHP: From Beginner to Advanced",
@@ -75,7 +89,7 @@ export function Certifications() {
       image: "/certifications/php-beginners-cert.jpg",
       description: "PHP fundamentals with hands-on CMS project development",
     },
-     {
+    {
       title: "The Ultimate React Course 2025: React, Next.js, Redux & More",
       issuer: "Udemy",
       date: "August 2, 2024",
@@ -91,24 +105,25 @@ export function Certifications() {
       duration: "10 hours",
       type: "Course Completion",
       image: "/certifications/yii2-cert.jpg",
-      description: "Yii2 PHP framework development from basics to advanced features",
+      description:
+        "Yii2 PHP framework development from basics to advanced features",
     },
-  ]
+  ];
 
   const getCertTypeColor = (type: string) => {
     switch (type) {
       case "Professional Certification":
-        return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300"
+        return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300";
       case "National Certification":
-        return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300"
+        return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300";
       case "Training Certificate":
-        return "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300"
+        return "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300";
       case "Course Completion":
-        return "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300"
+        return "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300";
       default:
-        return "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300"
+        return "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300";
     }
-  }
+  };
 
   return (
     <section id="certifications" className="py-20 bg-background" ref={ref}>
@@ -119,9 +134,12 @@ export function Certifications() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-balance">Certifications & Training</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-balance">
+            Certifications & Training
+          </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
-            Professional certifications and completed training programs that validate my technical expertise
+            Professional certifications and completed training programs that
+            validate my technical expertise
           </p>
         </motion.div>
 
@@ -139,13 +157,21 @@ export function Certifications() {
                     <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
                       <Award className="h-6 w-6 text-primary" />
                     </div>
-                    <Badge className={`text-xs ${getCertTypeColor(cert.type)}`}>{cert.type}</Badge>
+                    <Badge className={`text-xs ${getCertTypeColor(cert.type)}`}>
+                      {cert.type}
+                    </Badge>
                   </div>
-                  <CardTitle className="text-lg leading-tight text-balance">{cert.title}</CardTitle>
-                  <p className="text-sm text-muted-foreground font-medium">{cert.issuer}</p>
+                  <CardTitle className="text-lg leading-tight text-balance">
+                    {cert.title}
+                  </CardTitle>
+                  <p className="text-sm text-muted-foreground font-medium">
+                    {cert.issuer}
+                  </p>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p className="text-sm text-muted-foreground leading-relaxed">{cert.description}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {cert.description}
+                  </p>
 
                   <div className="space-y-2">
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -186,5 +212,5 @@ export function Certifications() {
         />
       )}
     </section>
-  )
+  );
 }
