@@ -19,7 +19,7 @@ export function Portfolio() {
       description:
         "Development of a comprehensive internal support system at NextBPO Solutions for production employees to request assistance. Built scalable backend architecture with Laravel and MySQL to handle IT support tickets, administrative requests, utility management, and employee leave applications. Implemented role-based access control, automated workflow routing, and real-time status tracking that streamlined internal operations.",
       image: "/ticketing-system-login.png",
-      images: ["/ticketing-system-login.png"],
+      images: ["/ticketing-system-login.png", "ticketing.png"],
       technologies: ["Laravel", "PHP", "MySQL", "REST APIs", "Role-Based Access Control"],
       featured: true,
     },
@@ -48,8 +48,8 @@ export function Portfolio() {
       title: "VetInspect - Livestock Inspection System",
       description:
         "Developed a cross-platform mobile and web application for the Davao City Veterinarian Office to streamline livestock inspection processes. Built with Flutter for mobile and JavaScript for web, integrated with Firebase for real-time data synchronization. Features include inspection scheduling, data entry, establishment management, comprehensive reporting with charts and analytics, and audit logging. Successfully deployed and tested, improving efficiency in livestock inspection workflows.",
-      image: "/vetinspect-dashboard.png",
-      images: ["/vetinspect-dashboard.png", "/vetinspect-mobile.jpg"],
+      image: "/vetinspect_client.jpg",
+      images: ["/vetinspect_client.jpg", "/vetinspect-poster.jpg", "/vetinspect-dashboard.png", "/vetinspect-mobile.jpg"],
       technologies: ["Flutter", "JavaScript", "Firebase", "Mobile Development", "Data Analytics"],
       featured: true,
     },

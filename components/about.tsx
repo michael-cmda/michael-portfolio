@@ -1,22 +1,23 @@
 "use client"
 
+import { useState, useRef } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import { Calendar, MapPin, GraduationCap } from "lucide-react"
-import { motion } from "framer-motion"
-import { useInView } from "framer-motion"
-import { useRef } from "react"
+import { motion, useInView } from "framer-motion"
+import { ImageModal } from "./image-modal" // new unified modal
 
-// Timeline Data (unsorted)
+// Timeline Data
 const timeline = [
   {
-    date: "2025-04", // YYYY-MM format
+    date: "2025-04",
     month: "April",
     year: "2025",
     title: "Web Developer",
     company: "SixEleven Global Services and Solutions",
     description:
-      "Currently developing web and mobile applications, collaborating with cross-functional teams, and delivering scalable solutions using React, Flutter, and Firebase.",
+      "Currently developing web applications with a Laravel API backend and React frontend, collaborating with cross-functional teams, and delivering scalable and maintainable solutions.",
   },
   {
     date: "2024-06",
@@ -26,6 +27,8 @@ const timeline = [
     company: "Next BPO Solutions Inc.",
     description:
       "Built internal systems including admin dashboards, examination platforms, and team communication tools using PHP, Laravel, and JavaScript.",
+    image: "backend-nbpo.jpg",
+    images: ["backend-nbpo.jpg"],
   },
   {
     date: "2023-11",
@@ -35,6 +38,8 @@ const timeline = [
     company: "Next BPO Solutions Inc.",
     description:
       "Gained hands-on experience in backend development, API creation, and database management while working on real-world projects.",
+    image: "intern1.jpg",
+    images: ["intern1.jpg", "intern2.jpg", "intern3.jpg"],
   },
   {
     date: "2024-10",
@@ -44,13 +49,16 @@ const timeline = [
     company: "University of Mindanao – Davao City",
     description:
       "Completed degree with focus on web development, mobile applications, database systems, and software engineering principles.",
+    image: "student1.jpg",
+    images: ["student1.jpg", "student2.jpg", "student3.jpg"],
   },
 ]
 
-// Sort timeline by date (descending so newest first)
-const sortedTimeline = [...timeline].sort((a, b) => (a.date < b.date ? 1 : -1))
+// Sort newest first
+const sortedTimeline = [...timeline].sort((a, b) =>
+  a.date < b.date ? 1 : -1
+)
 
-// Areas of Focus
 const interests = [
   "Web Development",
   "Mobile App Development",
@@ -66,97 +74,136 @@ export function About() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
+  // Unified modal state
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [images, setImages] = useState<string[]>([])
+  const [currentImageIndex, setCurrentImageIndex] = useState<number | null>(null)
+
+  const openGallery = (imgs: string[]) => {
+    setImages(imgs)
+    setCurrentImageIndex(null) // start in gallery view
+    setIsModalOpen(true)
+  }
+
+  const openImage = (index: number) => {
+    setCurrentImageIndex(index)
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false)
+    setCurrentImageIndex(null)
+  }
+
   return (
     <section id="about" className="py-20 bg-muted/30" ref={ref}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        {/* HEADER */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
-          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="mb-12"
         >
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">About Me</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Web and mobile developer with experience in backend, frontend, and cross-platform development, specializing
-            in scalable systems and intuitive user experiences.
+          <p className="text-lg text-muted-foreground mb-6">
+            Web and mobile developer with experience in backend, frontend, and
+            cross-platform development, specializing in scalable systems and
+            intuitive user experiences.
           </p>
+          <p className="text-muted-foreground mb-6">
+            I’m a web and mobile developer with hands-on experience building
+            internal systems such as admin dashboards, examination platforms,
+            and team communication tools.
+          </p>
+
+          <div className="space-y-2 mb-6">
+            <div className="flex items-center justify-center gap-2 text-muted-foreground">
+              <MapPin className="h-5 w-5 text-primary" />
+              <span>Davao City, Philippines</span>
+            </div>
+            <div className="flex items-center justify-center gap-2 text-muted-foreground">
+              <Calendar className="h-5 w-5 text-primary" />
+              <span>Available for new opportunities</span>
+            </div>
+            <div className="flex items-center justify-center gap-2 text-muted-foreground">
+              <GraduationCap className="h-5 w-5 text-primary" />
+              <span>Bachelor of Information Technology Graduate</span>
+            </div>
+          </div>
+
+          <h3 className="text-lg font-semibold mb-4">Areas of Focus</h3>
+          <div className="flex flex-wrap justify-center gap-2">
+            {interests.map((interest) => (
+              <Badge key={interest} variant="secondary">
+                {interest}
+              </Badge>
+            ))}
+          </div>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <p className="text-muted-foreground leading-relaxed mb-6">
-              I’m a web and mobile developer with hands-on experience building internal systems such as admin
-              dashboards, examination platforms, and team communication tools. On the web side, I work with PHP,
-              JavaScript, React, and SQL to design and develop scalable applications. On the mobile side, I use Flutter
-              and Firebase to create cross-platform apps with real-time features and seamless integrations.
-            </p>
-            <p className="text-muted-foreground leading-relaxed mb-6">
-              I enjoy collaborating with teams and participating in cross-functional meetings to deliver solutions that
-              improve workflows and operations. My passion lies in building efficient, user-friendly systems that make a
-              real impact, whether on the web or mobile.
-            </p>
+        {/* TIMELINE */}
+        <motion.div
+          initial={{ opacity: 0, x: 0 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="space-y-6"
+        >
+          {sortedTimeline.map((item, index) => (
+            <Card key={index} className="overflow-hidden mx-auto">
+              {item.image && (
+                <div className="relative group">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+              )}
 
-            <div className="space-y-4 mb-8">
-              <div className="flex items-center gap-3 text-muted-foreground">
-                <MapPin className="h-5 w-5 text-primary" />
-                <span>Davao City, Philippines</span>
-              </div>
-              <div className="flex items-center gap-3 text-muted-foreground">
-                <Calendar className="h-5 w-5 text-primary" />
-                <span>Available for new opportunities</span>
-              </div>
-              <div className="flex items-center gap-3 text-muted-foreground">
-                <GraduationCap className="h-5 w-5 text-primary" />
-                <span>Bachelor of Information Technology Graduate</span>
-              </div>
-            </div>
+              <CardContent className="p-6 text-center">
+                <div className="flex flex-col items-center gap-4">
+                  <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center text-center px-1">
+                    <span className="text-foreground font-extrabold text-xs leading-tight">
+                      {item.month} <br /> {item.year}
+                    </span>
+                  </div>
 
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Areas of Focus</h3>
-              <div className="flex flex-wrap gap-2">
-                {interests.map((interest) => (
-                  <Badge key={interest} variant="secondary">
-                    {interest}
-                  </Badge>
-                ))}
-              </div>
-            </div>
-          </motion.div>
+                  <div className="flex flex-col items-center gap-2">
+                    <div className="flex items-center gap-3">
+                      <h4 className="font-semibold text-lg">{item.title}</h4>
 
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <h3 className="text-2xl font-bold mb-8">My Journey</h3>
-            <div className="space-y-6">
-              {sortedTimeline.map((item, index) => (
-                <Card key={index} className="relative">
-                  <CardContent className="p-6">
-                    <div className="flex items-start gap-4">
-                      <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-center px-1">
-                        <span className="text-foreground font-extrabold text-xs leading-tight">
-                          {item.month} <br /> {item.year}
-                        </span>
-                      </div>
-
-                      <div className="flex-1">
-                        <h4 className="font-semibold text-lg mb-1">{item.title}</h4>
-                        <p className="text-primary font-medium mb-2">{item.company}</p>
-                        <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
-                      </div>
+                      {item.images?.length > 0 && (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => openGallery(item.images)}
+                        >
+                          View Images
+                        </Button>
+                      )}
                     </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </motion.div>
-        </div>
+
+                    <p className="text-primary font-medium">{item.company}</p>
+                    <p className="text-muted-foreground text-sm leading-relaxed max-w-xl">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </motion.div>
       </div>
+
+      {/* Unified Modal */}
+      <ImageModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        images={images}
+        currentImageIndex={currentImageIndex}
+        onImageClick={openImage}
+      />
     </section>
   )
 }
