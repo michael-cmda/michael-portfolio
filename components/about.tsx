@@ -140,6 +140,9 @@ export function About() {
             ))}
           </div>
         </motion.div>
+<h3 className="text-2xl font-bold mb-6 text-center">
+ Experience
+</h3>
 
         {/* TIMELINE */}
         <motion.div
