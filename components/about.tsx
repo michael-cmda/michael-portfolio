@@ -150,17 +150,21 @@ export function About() {
         >
           {sortedTimeline.map((item, index) => (
             <Card key={index} className="overflow-hidden mx-auto">
-              {item.image && (
-                <div className="relative group">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </div>
-              )}
-
+          {item.image && item.images?.length > 0 && (
+  <div
+    className="relative group cursor-pointer"
+    onClick={() => openGallery(item.images)}
+  >
+    <img
+      src={item.image}
+      alt={item.title}
+      className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-300"
+    />
+    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-sm font-medium">
+    
+    </div>
+  </div>
+)}
               <CardContent className="p-6 text-center">
                 <div className="flex flex-col items-center gap-4">
                   <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center text-center px-1">
