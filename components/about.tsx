@@ -17,7 +17,9 @@ const timeline = [
     title: "Web Developer",
     company: "SixEleven Global Services and Solutions",
     description:
-      "Currently developing web applications with a Laravel API backend and React frontend, collaborating with cross-functional teams, and delivering scalable and maintainable solutions.",
+      "Currently developing internal web applications with a Laravel API backend and React frontend, building company systems that connect all branches, streamline workflows, and enable faster business processes while collaborating with cross-functional teams.",
+       image: "sixeleven.jpg",
+    images: ["sixeleven.jpg"],
   },
   {
     date: "2024-06",
