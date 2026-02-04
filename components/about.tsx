@@ -99,7 +99,7 @@ export function About() {
               {[
                 { icon: MapPin, text: "Davao City, Philippines" },
                 { icon: Calendar, text: "Available for new opportunities", highlight: true },
-                { icon: GraduationCap, text: "Bachelor of IT Graduate" }
+                { icon: GraduationCap, text: "Bachelor of Information Technology" }
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-4 p-3 rounded-xl border bg-card/50 backdrop-blur-sm">
                   <div className="p-2 bg-primary/10 rounded-lg">
