@@ -1,14 +1,14 @@
 "use client"
 
 import { useState, useRef } from "react"
-import { Card, CardContent } from "@/components/ui/card"
+import { motion, useInView, AnimatePresence } from "framer-motion"
+import { Calendar, MapPin, GraduationCap, ArrowUpRight, Sparkles } from "lucide-react"
+import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Calendar, MapPin, GraduationCap } from "lucide-react"
-import { motion, useInView } from "framer-motion"
-import { ImageModal } from "./image-modal" // new unified modal
+import { ImageModal } from "./image-modal"
 
-// Timeline Data
+// -- Data remains untouched --
 const timeline = [
   {
     date: "2025-04",
@@ -16,9 +16,8 @@ const timeline = [
     year: "2025",
     title: "Web Developer",
     company: "SixEleven Global Services and Solutions",
-    description:
-      "Currently developing internal web applications with a Laravel API backend and React frontend, building company systems that connect all branches, streamline workflows, and enable faster business processes while collaborating with cross-functional teams.",
-       image: "sixeleven.jpg",
+    description: "Currently developing internal web applications with a Laravel API backend and React frontend, building company systems that connect all branches, streamline workflows, and enable faster business processes while collaborating with cross-functional teams.",
+    image: "sixeleven.jpg",
     images: ["sixeleven.jpg"],
   },
   {
@@ -27,8 +26,7 @@ const timeline = [
     year: "2024",
     title: "Backend Developer",
     company: "Next BPO Solutions Inc.",
-    description:
-      "Built internal systems including admin dashboards, examination platforms, and team communication tools using PHP, Laravel, and JavaScript.",
+    description: "Built internal systems including admin dashboards, examination platforms, and team communication tools using PHP, Laravel, and JavaScript.",
     image: "backend-nbpo.jpg",
     images: ["backend-nbpo.jpg"],
   },
@@ -38,8 +36,7 @@ const timeline = [
     year: "2023",
     title: "Backend Developer Intern",
     company: "Next BPO Solutions Inc.",
-    description:
-      "Gained hands-on experience in backend development, API creation, and database management while working on real-world projects.",
+    description: "Gained hands-on experience in backend development, API creation, and database management while working on real-world projects.",
     image: "intern1.jpg",
     images: ["intern1.jpg", "intern2.jpg", "intern3.jpg"],
   },
@@ -49,169 +46,135 @@ const timeline = [
     year: "2024",
     title: "Bachelor of Information Technology",
     company: "University of Mindanao – Davao City",
-    description:
-      "Completed degree with focus on web development, mobile applications, database systems, and software engineering principles.",
+    description: "Completed degree with focus on web development, mobile applications, database systems, and software engineering principles.",
     image: "student1.jpg",
     images: ["student1.jpg", "student2.jpg", "student3.jpg"],
   },
 ]
 
-// Sort newest first
-const sortedTimeline = [...timeline].sort((a, b) =>
-  a.date < b.date ? 1 : -1
-)
-
 const interests = [
-  "Web Development",
-  "Mobile App Development",
-  "API Development",
-  "Database Design",
-  "Flutter & Firebase",
-  "System Architecture",
-  "Team Collaboration",
-  "Continuous Learning",
+  "Web Development", "Mobile App Development", "API Development",
+  "Database Design", "Flutter & Firebase", "System Architecture",
+  "Team Collaboration", "Continuous Learning",
 ]
 
+const sortedTimeline = [...timeline].sort((a, b) => (a.date < b.date ? 1 : -1))
+
 export function About() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const containerRef = useRef(null)
+  const isInView = useInView(containerRef, { once: true, margin: "-100px" })
 
-  // Unified modal state
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [images, setImages] = useState<string[]>([])
-  const [currentImageIndex, setCurrentImageIndex] = useState<number | null>(null)
-
-  const openGallery = (imgs: string[]) => {
-    setImages(imgs)
-    setCurrentImageIndex(null) // start in gallery view
-    setIsModalOpen(true)
-  }
-
-  const openImage = (index: number) => {
-    setCurrentImageIndex(index)
-  }
-
-  const closeModal = () => {
-    setIsModalOpen(false)
-    setCurrentImageIndex(null)
-  }
+  const [modalState, setModalState] = useState({ open: false, images: [] as string[] })
 
   return (
-    <section id="about" className="py-20 bg-muted/30" ref={ref}>
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        {/* HEADER */}
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={isInView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="mb-12"
-        >
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">About Me</h2>
-          <p className="text-lg text-muted-foreground mb-6">
-            Web and mobile developer with experience in backend, frontend, and
-            cross-platform development, specializing in scalable systems and
-            intuitive user experiences.
-          </p>
-          <p className="text-muted-foreground mb-6">
-            I’m a web and mobile developer with hands-on experience building
-            internal systems such as admin dashboards, examination platforms,
-            and team communication tools.
-          </p>
-
-          <div className="space-y-2 mb-6">
-            <div className="flex items-center justify-center gap-2 text-muted-foreground">
-              <MapPin className="h-5 w-5 text-primary" />
-              <span>Davao City, Philippines</span>
-            </div>
-            <div className="flex items-center justify-center gap-2 text-muted-foreground">
-              <Calendar className="h-5 w-5 text-primary" />
-              <span>Available for new opportunities</span>
-            </div>
-            <div className="flex items-center justify-center gap-2 text-muted-foreground">
-              <GraduationCap className="h-5 w-5 text-primary" />
-              <span>Bachelor of Information Technology Graduate</span>
-            </div>
-          </div>
-
-          <h3 className="text-lg font-semibold mb-4">Areas of Focus</h3>
-          <div className="flex flex-wrap justify-center gap-2">
-            {interests.map((interest) => (
-              <Badge key={interest} variant="secondary">
-                {interest}
-              </Badge>
-            ))}
-          </div>
-        </motion.div>
-<h3 className="text-2xl font-bold mb-6 text-center">
- Experience
-</h3>
-
-        {/* TIMELINE */}
-        <motion.div
-          initial={{ opacity: 0, x: 0 }}
-          animate={isInView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="space-y-6"
-        >
-          {sortedTimeline.map((item, index) => (
-            <Card key={index} className="overflow-hidden mx-auto">
-          {item.image && item.images?.length > 0 && (
-  <div
-    className="relative group cursor-pointer"
-    onClick={() => openGallery(item.images)}
-  >
-    <img
-      src={item.image}
-      alt={item.title}
-      className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-300"
-    />
-    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-sm font-medium">
-    
-    </div>
-  </div>
-)}
-              <CardContent className="p-6 text-center">
-                <div className="flex flex-col items-center gap-4">
-                  <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center text-center px-1">
-                    <span className="text-foreground font-extrabold text-xs leading-tight">
-                      {item.month} <br /> {item.year}
-                    </span>
-                  </div>
-
-                  <div className="flex flex-col items-center gap-2">
-                    <div className="flex items-center gap-3">
-                      <h4 className="font-semibold text-lg">{item.title}</h4>
-
-                      {item.images?.length > 0 && (
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => openGallery(item.images)}
-                        >
-                          View Images
-                        </Button>
-                      )}
-                    </div>
-
-                    <p className="text-primary font-medium">{item.company}</p>
-                    <p className="text-muted-foreground text-sm leading-relaxed max-w-xl">
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </motion.div>
+    <section id="about" className="relative py-24 overflow-hidden bg-background" ref={containerRef}>
+      {/* Background Decor - Modern Subtle Gradients */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 opacity-30 pointer-events-none">
+        <div className="absolute top-24 left-10 w-72 h-72 bg-primary/20 rounded-full blur-[120px]" />
+        <div className="absolute bottom-24 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px]" />
       </div>
 
-      {/* Unified Modal */}
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          
+          {/* LEFT COLUMN: Profile & Stats */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-5 space-y-8"
+          >
+            <div>
+              <h2 className="text-5xl font-bold tracking-tight mb-6 bg-gradient-to-br from-foreground to-muted-foreground bg-clip-text text-transparent">
+                About Me
+              </h2>
+              <div className="space-y-4 text-lg leading-relaxed text-muted-foreground">
+             <p>Developer specializing in web and mobile applications, focusing on creating efficient backend systems and polished frontend experiences.</p>
+<p className="text-base">I build practical tools for real-world use, including admin dashboards, assessment platforms, and team productivity solutions.</p>
+
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 gap-3">
+              {[
+                { icon: MapPin, text: "Davao City, Philippines" },
+                { icon: Calendar, text: "Available for new opportunities", highlight: true },
+                { icon: GraduationCap, text: "Bachelor of IT Graduate" }
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-4 p-3 rounded-xl border bg-card/50 backdrop-blur-sm">
+                  <div className="p-2 bg-primary/10 rounded-lg">
+                    <item.icon className={`h-5 w-5 ${item.highlight ? 'text-primary' : 'text-muted-foreground'}`} />
+                  </div>
+                  <span className="text-sm font-medium">{item.text}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="pt-4">
+              <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground mb-4">Areas of Focus</h3>
+              <div className="flex flex-wrap gap-2">
+                {interests.map((interest) => (
+                  <Badge key={interest} variant="secondary" className="hover:bg-primary hover:text-primary-foreground transition-colors cursor-default py-1.5 px-3">
+                    {interest}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
+          {/* RIGHT COLUMN: Modern Timeline */}
+          <div className="lg:col-span-7 relative">
+            <h3 className="text-2xl font-bold mb-10 flex items-center gap-3">
+              Professional Journey
+              <div className="h-px flex-1 bg-border" />
+            </h3>
+
+            <div className="space-y-12 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-border before:to-transparent">
+              {sortedTimeline.map((item, index) => (
+                <motion.div 
+                  key={index}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ delay: index * 0.1 }}
+                  className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group"
+                >
+                  {/* Timeline Dot */}
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full border bg-background absolute left-0 md:left-1/2 md:-ml-5 shadow-sm group-hover:border-primary transition-colors duration-500 z-10">
+                    <div className="w-2 h-2 rounded-full bg-muted-foreground group-hover:bg-primary transition-colors" />
+                  </div>
+
+                  {/* Content Card */}
+                  <Card className="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] overflow-hidden border-muted/60 hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
+                    {item.image && (
+                      <div className="relative h-48 overflow-hidden cursor-pointer" onClick={() => setModalState({ open: true, images: item.images })}>
+                        <img src={item.image} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-4">
+                          <Button size="sm" variant="secondary" className="h-8 text-xs opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all">
+                            View Images <ArrowUpRight className="ml-1 w-3 h-3" />
+                          </Button>
+                        </div>
+                      </div>
+                    )}
+                    <div className="p-5">
+                      <time className="text-xs font-bold text-primary mb-1 block uppercase tracking-wider">{item.month} {item.year}</time>
+                      <h4 className="text-xl font-bold mb-1 group-hover:text-primary transition-colors">{item.title}</h4>
+                      <p className="text-sm font-semibold text-muted-foreground mb-3">{item.company}</p>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
+                    </div>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
       <ImageModal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        images={images}
-        currentImageIndex={currentImageIndex}
-        onImageClick={openImage}
+        isOpen={modalState.open}
+        onClose={() => setModalState({ ...modalState, open: false })}
+        images={modalState.images}
+        currentImageIndex={null}
+        onImageClick={(i) => {}}
       />
     </section>
   )
