@@ -1,134 +1,109 @@
 "use client"
 
+import { motion } from "framer-motion"
+import { Github, Linkedin, ArrowUpRight, FileText } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Github, Linkedin, ArrowUpRight } from "lucide-react"
-import { motion, useAnimation } from "framer-motion"
-import { useEffect } from "react"
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+}
 
 export function Hero() {
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
   }
 
-  const nameControls = useAnimation()
-  const bottomControls = useAnimation()
-  const imageControls = useAnimation()
-
-  useEffect(() => {
-    async function sequence() {
-      // 1️⃣ Animate name and image in together
-      await Promise.all([
-        nameControls.start({ opacity: 1, x: 0, y: 0, transition: { duration: 1 } }),
-        imageControls.start({ opacity: 1, x: 0, transition: { duration: 1 } }),
-      ])
-
-      // 2️⃣ Move name away
-      await nameControls.start({
-        x: -200,
-        y: -100,
-        opacity: 0.1,
-        transition: { duration: 1, ease: "easeInOut" },
-      })
-
-      // 3️⃣ Show bottom hero content
-      await bottomControls.start({ opacity: 1, y: 0, transition: { duration: 1 } })
-    }
-
-    sequence()
-  }, [])
-
   return (
-    <section
-      id="home"
-      className="h-screen w-full flex items-center justify-center relative overflow-hidden bg-[#fbfafa]"
-    >
-      {/* 1. NAME */}
-      <motion.div
-        animate={nameControls}
-        initial={{ opacity: 0, x: -100, y: 0 }}
-        className="absolute inset-y-0 left-0 w-full flex items-center z-0 select-none px-8 md:px-20 pointer-events-none"
-      >
-        <h1 className="text-[14vw] font-[950] leading-[0.75] uppercase tracking-tighter text-black/[0.16] text-left">
-          MICHAEL<br />
-          JAN<br />
-          ARIETA
-        </h1>
-      </motion.div>
-
-      {/* 2. IMAGE */}
-      <div className="absolute inset-0 flex items-end justify-end z-10 pointer-events-none">
-        <motion.div
-          animate={imageControls}
-          initial={{ opacity: 0, x: 100 }}
-          className="relative h-[90vh] w-auto right-0 pr-4 lg:pr-20"
-        >
-          <img
-            src="/profile.png"
-            alt="Michael Jan Arieta"
-            className="h-full w-auto object-contain drop-shadow-[-40px_0_60px_rgba(0,0,0,0.07)]"
-          />
-        </motion.div>
+    <section className="relative min-h-screen w-full flex flex-col justify-center bg-[#fbfafa] overflow-hidden">
+      
+      {/* Background Text Decor */}
+      <div className="absolute inset-0 hidden md:flex items-center justify-center pointer-events-none opacity-[0.03] select-none">
       </div>
 
-      {/* 3. SCROLL HINT stays untouched */}
-      <div className="absolute inset-y-0 left-0 w-full flex items-center z-20 pointer-events-none select-none px-8 md:px-20">
-        <motion.h1
-          initial={{ opacity: 0, x: -100 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          style={{ WebkitTextStroke: "1px rgba(0,0,0,0.1)" }}
-          className="text-[12vw] font-[950] leading-[0.75] uppercase tracking-tighter text-transparent text-left"
+      <div className="container mx-auto px-6 md:px-12 lg:px-20 py-20 flex flex-col lg:flex-row items-center gap-12">
+        
+        {/* TEXT CONTENT */}
+        <motion.div 
+          initial="hidden"
+          animate="visible"
+          variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+          className="flex-1 z-20 text-center lg:text-left order-2 lg:order-1"
         >
-          MICHAEL<br />
-          JAN<br />
-          ARIETA
-        </motion.h1>
-      </div>
-
-      {/* 4. BOTTOM HERO */}
-      <div className="relative z-30 w-full h-full max-w-[1440px] flex flex-col justify-between p-8 md:p-16">
-        <div className="flex justify-between items-start">
-          <p className="text-primary font-bold text-[10px] tracking-[0.5em] uppercase">
+          <motion.span variants={fadeInUp} className="inline-block text-primary font-bold tracking-[0.3em] uppercase text-[10px] mb-4">
             Based in Philippines
-          </p>
-        </div>
+          </motion.span>
+          
+          <motion.h1 variants={fadeInUp} className="text-4xl md:text-6xl lg:text-8xl font-black text-black leading-[0.9] mb-6">
+            MICHAEL <br />
+            <span className="text-transparent" style={{ WebkitTextStroke: "1px #000" }}>JAN ARIETA</span>
+          </motion.h1>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
-          <motion.div
-            animate={bottomControls}
-            initial={{ opacity: 0, y: 40 }}
-            className="lg:col-span-5 p-8 border border-black/5 shadow-[20px_20px_60px_rgba(0,0,0,0.03)]"
-          >
-            <h2 className="text-2xl md:text-3xl font-bold text-primary tracking-[0.3em] uppercase mb-6">
-              Core Expertise
-            </h2>
-            <p className="text-black text-3xl md:text-5xl font-bold leading-tight mb-8 tracking-tight">
-              Building <span className="text-primary underline decoration-2 underline-offset-4">scalable</span> backend systems, resilient APIs, and high-performance architectures.
-            </p>
+          <motion.p variants={fadeInUp} className="text-base md:text-lg text-black/60 max-w-lg mx-auto lg:mx-0 mb-8 leading-relaxed">
+            Building <span className="text-black font-bold">scalable backend systems</span> and high-performance architectures that drive modern applications.
+          </motion.p>
 
-            <div className="flex items-center gap-6">
-              <Button
-                onClick={() => scrollToSection("portfolio")}
-                className="rounded-none bg-black text-white hover:bg-primary px-8 h-14 font-black transition-all flex gap-3 group"
-              >
-                PROJECTS
-                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+          {/* CALL TO ACTION BUTTONS */}
+          <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-8">
+            <Button 
+              onClick={() => scrollToSection("portfolio")}
+              className="w-full sm:w-auto rounded-none bg-black text-white hover:bg-primary h-14 px-8 font-bold group"
+            >
+              VIEW PROJECTS
+              <ArrowUpRight className="ml-2 w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+            </Button>
+            
+            {/* DOWNLOAD RESUME BUTTON */}
+            <a 
+              href="/MichaelJan Arieta_Resume.pdf" // <-- ADD YOUR FILE PATH HERE
+              download="Michael_Arieta_Resume.pdf"
+              className="w-full sm:w-auto"
+            >
+              <Button variant="outline" className="w-full sm:w-auto rounded-none border-black/10 h-14 px-8 font-bold flex gap-2 hover:bg-black hover:text-white transition-all">
+                <FileText size={18} />
+                DOWNLOAD CV
               </Button>
-              <div className="flex gap-5 items-center">
-                <a href="#" className="hover:text-primary transition-colors text-black/40"><Github size={20} /></a>
-                <a href="#" className="hover:text-primary transition-colors text-black/40"><Linkedin size={20} /></a>
-              </div>
-            </div>
+            </a>
           </motion.div>
 
-          {/* Scroll to Explore */}
-          <div className="hidden lg:flex lg:col-span-7 justify-end">
-            <div className="flex items-center gap-4 rotate-90 origin-right translate-y-[-100px]">
-              <span className="text-[10px] font-black tracking-[0.3em] uppercase opacity-20">Scroll to Explore</span>
-              <div className="w-12 h-[1px] bg-black/20" />
-            </div>
+          {/* SOCIAL LINKS */}
+          <motion.div variants={fadeInUp} className="flex gap-8 items-center justify-center lg:justify-start">
+            <a 
+              href="https://github.com/michael-cmda" // <-- ADD YOUR GITHUB LINK
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-black/40 hover:text-black transition-colors flex items-center gap-2 text-sm font-bold tracking-widest"
+            >
+              <Github size={20} /> GITHUB
+            </a>
+            <a 
+              href="https://www.linkedin.com/in/michael-jan-arieta-a8b30a242/" // <-- ADD YOUR LINKEDIN LINK
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-black/40 hover:text-[#0077b5] transition-colors flex items-center gap-2 text-sm font-bold tracking-widest"
+            >
+              <Linkedin size={20} /> LINKEDIN
+            </a>
+          </motion.div>
+        </motion.div>
+
+        {/* IMAGE AREA */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          className="flex-1 flex justify-center lg:justify-end order-1 lg:order-2"
+        >
+          <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-[450px] lg:h-[600px]">
+            <div className="absolute inset-0 bg-primary/5 -rotate-6 rounded-3xl" />
+            <img 
+              src="/profile.png" 
+              alt="Michael Jan Arieta" 
+              className="relative z-10 w-full h-full object-contain filter drop-shadow-2xl"
+            />
           </div>
-        </div>
+        </motion.div>
+
       </div>
     </section>
   )
