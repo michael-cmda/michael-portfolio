@@ -34,14 +34,16 @@ export function Navigation() {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-    }
-    setIsOpen(false)
+  
+const scrollToSection = (sectionId: string) => {
+  setActiveSection(sectionId) // ← highlight tab instantly
+  const element = document.getElementById(sectionId)
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth", block: "start" })
   }
+  setIsOpen(false)
+}
+
 
   const navItems = [
     { id: "home", label: "Home" },

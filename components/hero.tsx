@@ -15,7 +15,10 @@ export function Hero() {
   }
 
   return (
-    <section className="relative min-h-screen w-full flex flex-col justify-center bg-[#fbfafa] overflow-hidden">
+    <section
+  id="home"  // ← ADD THIS
+  className="relative min-h-screen w-full flex flex-col justify-center bg-[#fbfafa] overflow-hidden"
+>
       
       {/* Background Text Decor */}
       <div className="absolute inset-0 hidden md:flex items-center justify-center pointer-events-none opacity-[0.03] select-none">
