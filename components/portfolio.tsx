@@ -18,8 +18,8 @@ export function Portfolio() {
       title: "Employee Assistance & Support System",
       description:
         "Development of a comprehensive internal support system at NextBPO Solutions for production employees to request assistance. Built scalable backend architecture with Laravel and MySQL to handle IT support tickets, administrative requests, utility management, and employee leave applications. Implemented role-based access control, automated workflow routing, and real-time status tracking that streamlined internal operations.",
-      image: "/ticketing-system-login.png",
-      images: ["/ticketing-system-login.png", "ticketing.png"],
+      image: "/ticketing.jpg",
+      images: ["/ticketing-system-login.png", "ticketing.jpg"],
       technologies: ["Laravel", "PHP", "MySQL", "REST APIs", "Role-Based Access Control"],
       featured: true,
     },
@@ -27,9 +27,9 @@ export function Portfolio() {
       title: "Applicant Assessment Application",
       description:
         "Developed a comprehensive web-based assessment platform for HR recruitment processes. Built robust backend architecture using Laravel and MySQL to handle multiple exam types including MCQs, audio simulations, mock calls, and typing speed tests. Implemented complex scoring algorithms, weighted calculations, and automated grading systems with manual review capabilities for audio responses.",
-      image: "/assessment-hr-dashboard.png",
+      image: "/assesment_dashboard.jpg",
       images: [
-        "/assessment-hr-dashboard.png",
+        "/assesment_dashboard.jpg",
         "/assessment-exam-interface.png",
       ],
       technologies: ["Laravel", "PHP", "MySQL", "Laragon", "Audio Processing", "Data Privacy Compliance"],
@@ -39,8 +39,8 @@ export function Portfolio() {
       title: "Team Collaboration Platform",
       description:
         "Developed an integrated team collaboration hub that brings together chat, meetings, file sharing, and project management in one unified workspace. Features include persistent team channels, real-time messaging, employee presence tracking, secure authentication, and administrative controls. Designed to streamline communication workflows and enhance team productivity across distributed workforces.",
-      image: "/team-collaboration-login.png",
-      images: ["/team-collaboration-login.png", "/team-collaboration-chat.png", "/team-collaboration-tracking.png"],
+      image: "/team-collaboration-chat2.png",
+      images: ["/team-collaboration-login.png", "/team-collaboration-chat2.png"],
       technologies: ["React", "Laravel", "PHP", "JavaScript", "CSS", "Tailwind CSS"],
       featured: true,
     },
