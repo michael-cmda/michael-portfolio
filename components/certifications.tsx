@@ -43,15 +43,6 @@ export function Certifications() {
         "Government-issued certification for computer systems servicing competency",
     },
     {
-      title: "On-The-Job Training Certificate",
-      issuer: "Next BPO Solutions",
-      date: "May 24, 2024",
-      duration: "486 hours",
-      type: "Training Certificate",
-      image: "/certifications/bpo-training-cert.png",
-      description: "Completed comprehensive IT department training program",
-    },
-    {
       title: "Data Analytics Masters 2025 - From Basics To Advanced",
       issuer: "Udemy",
       date: "Dec 23, 2025",
