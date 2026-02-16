@@ -58,8 +58,8 @@ export function Hero() {
             
             {/* DOWNLOAD RESUME BUTTON */}
             <a 
-              href="/MichaelJan Arieta_Resume.pdf" // <-- ADD YOUR FILE PATH HERE
-              download="Michael_Arieta_Resume.pdf"
+              href="/MichaelJanArieta_CV.pdf" // <-- ADD YOUR FILE PATH HERE
+              download="Michael_Arieta_CV.pdf"
               className="w-full sm:w-auto"
             >
               <Button variant="outline" className="w-full sm:w-auto rounded-none border-black/10 h-14 px-8 font-bold flex gap-2 hover:bg-black hover:text-white transition-all">
