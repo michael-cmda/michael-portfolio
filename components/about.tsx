@@ -1,22 +1,22 @@
 "use client"
 
 import { useState, useRef } from "react"
-import { motion, useInView, AnimatePresence } from "framer-motion"
-import { Calendar, MapPin, GraduationCap, ArrowUpRight, Sparkles } from "lucide-react"
-import { Card } from "@/components/ui/card"
+import { motion, useInView } from "framer-motion"
+import { MapPin, Calendar, GraduationCap, Briefcase, ExternalLink } from "lucide-react"
+import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import { ImageModal } from "./image-modal"
 
-// -- Data remains untouched --
-const timeline = [
+// --- Data (Unchanged but sorted for logic) ---
+const sortedTimeline = [
   {
     date: "2025-04",
     month: "April",
     year: "2025",
     title: "Web Developer",
-    company: "SixEleven Global Services and Solutions",
-    description: "Currently developing internal web applications with a Laravel API backend and React frontend, building company systems that connect all branches, streamline workflows, and enable faster business processes while collaborating with cross-functional teams.",
+    company: "SixEleven Global Services",
+    type: "Work",
+    description: "Developing internal web applications with a Laravel API backend and React frontend. Streamlining workflows and connecting branches through integrated systems.",
     image: "sixeleven.jpg",
     images: ["sixeleven.jpg"],
   },
@@ -26,145 +26,152 @@ const timeline = [
     year: "2024",
     title: "Backend Developer",
     company: "Next BPO Solutions Inc.",
-    description: "Built internal systems including admin dashboards, examination platforms, and team communication tools using PHP, Laravel, and JavaScript.",
+    type: "Work",
+    description: "Built admin dashboards and examination platforms using PHP, Laravel, and JavaScript.",
     image: "backend-nbpo.jpg",
     images: ["backend-nbpo.jpg"],
   },
   {
     date: "2023-11",
-    month: "November",
+    month: "Nov",
     year: "2023",
     title: "Backend Developer Intern",
     company: "Next BPO Solutions Inc.",
-    description: "Gained hands-on experience in backend development, API creation, and database management while working on real-world projects.",
+    type: "Work",
+    description: "Gained hands-on experience in API creation and database management.",
     image: "intern1.jpg",
     images: ["intern1.jpg", "intern2.jpg", "intern3.jpg"],
   },
   {
-    date: "2024-10",
-    month: "October",
+    date: "2020-06", // Adjusted date for chronological flow
+    month: "Oct",
     year: "2024",
-    title: "Bachelor of Science in Information Technology",
-    company: "University of Mindanao – Davao City",
-    description: "Completed degree with focus on web development, mobile applications, database systems, and software engineering principles.",
+    title: "BS in Information Technology",
+    company: "University of Mindanao",
+    type: "Education",
+    description: "Focused on web/mobile dev, database systems, and software engineering.",
     image: "student1.jpg",
     images: ["student1.jpg", "student2.jpg", "student3.jpg"],
   },
-]
+].sort((a, b) => (a.date < b.date ? 1 : -1))
 
 const interests = [
-  "Web Development", "Mobile App Development", "API Development",
-  "Database Design", "Flutter & Firebase", "System Architecture",
-  "Team Collaboration", "Continuous Learning",
+  "Web Development", "Mobile App Development", "API Development", 
+  "Database Design", "Flutter & Firebase", "System Architecture"
 ]
-
-const sortedTimeline = [...timeline].sort((a, b) => (a.date < b.date ? 1 : -1))
 
 export function About() {
   const containerRef = useRef(null)
   const isInView = useInView(containerRef, { once: true, margin: "-100px" })
-
   const [modalState, setModalState] = useState({ open: false, images: [] as string[] })
 
   return (
-    <section id="about" className="relative py-24 overflow-hidden bg-background" ref={containerRef}>
-      {/* Background Decor - Modern Subtle Gradients */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 opacity-30 pointer-events-none">
-        <div className="absolute top-24 left-10 w-72 h-72 bg-primary/20 rounded-full blur-[120px]" />
-        <div className="absolute bottom-24 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px]" />
-      </div>
-
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          
-          {/* LEFT COLUMN: Profile & Stats */}
+    <section id="about" className="py-24 bg-background/50" ref={containerRef}>
+      <div className="max-w-5xl mx-auto px-6">
+        
+        {/* === HEADER SECTION === */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-24">
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="lg:col-span-5 space-y-8"
+            className="lg:col-span-7 space-y-6"
+            initial={{ opacity: 0, x: -20 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6 }}
           >
-            <div>
-              <h2 className="text-5xl font-bold tracking-tight mb-6 bg-gradient-to-br from-foreground to-muted-foreground bg-clip-text text-transparent">
-                About Me
-              </h2>
-              <div className="space-y-4 text-lg leading-relaxed text-muted-foreground">
-             <p>Developer specializing in web and mobile applications, focusing on creating efficient backend systems and polished frontend experiences.</p>
-<p className="text-base">I build practical tools for real-world use, including admin dashboards, assessment platforms, and team productivity solutions.</p>
+            <Badge variant="outline" className="px-3 py-1 text-primary border-primary/30 uppercase tracking-widest">
+              About me
+            </Badge>
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-foreground">
+              Designing systems, <br />
+              <span className="text-muted-foreground">building experiences.</span>
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">
+            Developer specializing in web and mobile applications, focusing on creating efficient backend systems and polished frontend experiences.
 
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 gap-3">
-              {[
-                { icon: MapPin, text: "Davao City, Philippines" },
-                { icon: Calendar, text: "Available for new opportunities", highlight: true },
-                { icon: GraduationCap, text: "Bachelor of Science in Information Technology" }
-              ].map((item, i) => (
-                <div key={i} className="flex items-center gap-4 p-3 rounded-xl border bg-card/50 backdrop-blur-sm">
-                  <div className="p-2 bg-primary/10 rounded-lg">
-                    <item.icon className={`h-5 w-5 ${item.highlight ? 'text-primary' : 'text-muted-foreground'}`} />
-                  </div>
-                  <span className="text-sm font-medium">{item.text}</span>
-                </div>
+I build practical tools for real-world use, including admin dashboards, assessment platforms, and team productivity solutions.
+            </p>
+            
+            <div className="flex flex-wrap gap-2 pt-4">
+              {interests.map((interest) => (
+                <Badge key={interest} variant="secondary" className="bg-secondary/50 hover:bg-primary hover:text-white transition-all">
+                  {interest}
+                </Badge>
               ))}
-            </div>
-
-            <div className="pt-4">
-              <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground mb-4">Areas of Focus</h3>
-              <div className="flex flex-wrap gap-2">
-                {interests.map((interest) => (
-                  <Badge key={interest} variant="secondary" className="hover:bg-primary hover:text-primary-foreground transition-colors cursor-default py-1.5 px-3">
-                    {interest}
-                  </Badge>
-                ))}
-              </div>
             </div>
           </motion.div>
 
-          {/* RIGHT COLUMN: Modern Timeline */}
-          <div className="lg:col-span-7 relative">
-            <h3 className="text-2xl font-bold mb-10 flex items-center gap-3">
-              Professional Journey
-              <div className="h-px flex-1 bg-border" />
-            </h3>
+          <motion.div 
+            className="lg:col-span-5 grid grid-cols-1 gap-4"
+            initial={{ opacity: 0, x: 20 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            {[
+              { icon: MapPin, text: "Davao City, Philippines", label: "Location" },
+              { icon: Calendar, text: "Available for projects", label: "Status", highlight: true },
+              { icon: GraduationCap, text: "Bachelor of Science in Information Technology", label: "Education" },
+            ].map((item, i) => (
+              <div key={i} className="flex items-start gap-4 p-4 rounded-2xl border bg-card/30 hover:bg-card/80 transition-colors">
+                <div className="p-2.5 bg-primary/10 rounded-xl">
+                  <item.icon className={`h-5 w-5 ${item.highlight ? 'text-primary' : 'text-muted-foreground'}`} />
+                </div>
+                <div>
+                    <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">{item.label}</p>
+                    <p className="text-sm font-semibold">{item.text}</p>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
 
-            <div className="space-y-12 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-border before:to-transparent">
-              {sortedTimeline.map((item, index) => (
-                <motion.div 
-                  key={index}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ delay: index * 0.1 }}
-                  className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group"
-                >
-                  {/* Timeline Dot */}
-                  <div className="flex items-center justify-center w-10 h-10 rounded-full border bg-background absolute left-0 md:left-1/2 md:-ml-5 shadow-sm group-hover:border-primary transition-colors duration-500 z-10">
-                    <div className="w-2 h-2 rounded-full bg-muted-foreground group-hover:bg-primary transition-colors" />
+        {/* === TIMELINE SECTION === */}
+        <div className="space-y-12">
+          <div className="flex items-center gap-4">
+            <h3 className="text-2xl font-bold">Professional Journey</h3>
+            <div className="h-[1px] flex-1 bg-border/60" />
+          </div>
+
+          <div className="relative space-y-8 before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-primary/50 before:via-border before:to-transparent">
+            {sortedTimeline.map((item, index) => (
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group"
+              >
+                {/* Dot */}
+                <div className="flex items-center justify-center w-10 h-10 rounded-full border bg-background shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 absolute left-0 md:left-1/2 transform">
+                  {item.type === "Work" ? <Briefcase size={16} className="text-primary" /> : <GraduationCap size={16} className="text-primary" />}
+                </div>
+
+                {/* Card */}
+                <Card className="w-[calc(100%-3rem)] md:w-[45%] overflow-hidden border-border/50 hover:border-primary/30 transition-all shadow-sm hover:shadow-md">
+                  <div 
+                    className="relative h-40 cursor-zoom-in overflow-hidden" 
+                    onClick={() => setModalState({ open: true, images: item.images })}
+                  >
+                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors z-10" />
+                    <img src={item.image} alt={item.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <Badge className="absolute top-3 right-3 z-20 bg-background/80 backdrop-blur text-foreground hover:bg-background">
+                      {item.year}
+                    </Badge>
                   </div>
-
-                  {/* Content Card */}
-                  <Card className="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] overflow-hidden border-muted/60 hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5">
-                    {item.image && (
-                      <div className="relative h-48 overflow-hidden cursor-pointer" onClick={() => setModalState({ open: true, images: item.images })}>
-                        <img src={item.image} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-4">
-                          <Button size="sm" variant="secondary" className="h-8 text-xs opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all">
-                            View Images <ArrowUpRight className="ml-1 w-3 h-3" />
-                          </Button>
-                        </div>
-                      </div>
-                    )}
-                    <div className="p-5">
-                      <time className="text-xs font-bold text-primary mb-1 block uppercase tracking-wider">{item.month} {item.year}</time>
-                      <h4 className="text-xl font-bold mb-1 group-hover:text-primary transition-colors">{item.title}</h4>
-                      <p className="text-sm font-semibold text-muted-foreground mb-3">{item.company}</p>
-                      <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
+                  <CardContent className="p-5 space-y-3">
+                    <div>
+                      <div className="text-xs font-bold text-primary uppercase tracking-tight">{item.company}</div>
+                      <h4 className="text-lg font-bold leading-tight">{item.title}</h4>
                     </div>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {item.description}
+                    </p>
+                    <div className="flex items-center gap-2 text-[10px] font-medium text-muted-foreground pt-2">
+                        <Calendar size={12} /> {item.month} {item.year}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>
@@ -173,8 +180,8 @@ export function About() {
         isOpen={modalState.open}
         onClose={() => setModalState({ ...modalState, open: false })}
         images={modalState.images}
-        currentImageIndex={null}
-        onImageClick={(i) => {}}
+        currentImageIndex={0}
+        onImageClick={() => {}}
       />
     </section>
   )
