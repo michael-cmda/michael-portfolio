@@ -20,30 +20,8 @@ const sortedTimeline = [
     image: "sixeleven.jpg",
     images: ["sixeleven.jpg"],
   },
-  {
-    date: "2024-06",
-    month: "May",
-    year: "2024",
-    title: "Backend Developer",
-    company: "Next BPO Solutions Inc.",
-    type: "Work",
-    description: "Built admin dashboards and examination platforms using PHP, Laravel, and JavaScript.",
-    image: "backend-nbpo.jpg",
-    images: ["backend-nbpo.jpg"],
-  },
-  {
-    date: "2023-11",
-    month: "Nov",
-    year: "2023",
-    title: "Backend Developer Intern",
-    company: "Next BPO Solutions Inc.",
-    type: "Work",
-    description: "Gained hands-on experience in API creation and database management.",
-    image: "intern1.jpg",
-    images: ["intern1.jpg", "intern2.jpg", "intern3.jpg"],
-  },
-  {
-    date: "2020-06", // Adjusted date for chronological flow
+    {
+    date: "2020-06",
     month: "Oct",
     year: "2024",
     title: "BS in Information Technology",
@@ -53,7 +31,29 @@ const sortedTimeline = [
     image: "student1.jpg",
     images: ["student1.jpg", "student2.jpg", "student3.jpg"],
   },
-].sort((a, b) => (a.date < b.date ? 1 : -1))
+  {
+    date: "2024-06",
+    month: "June",
+    year: "2024",
+    title: "Backend Developer",
+    company: "Next BPO Solutions Inc.",
+    type: "Work",
+    description: "Built admin dashboards and examination platforms using PHP, Laravel, and JavaScript.",
+    image: "backend-nbpo.jpg",
+    images: ["backend-nbpo.jpg"],
+  },
+  {
+    date: "2024-02",
+    month: "Feb",
+    year: "2024",
+    title: "Backend Developer Intern",
+    company: "Next BPO Solutions Inc.",
+    type: "Work",
+    description: "Gained hands-on experience in API creation and database management.",
+    image: "intern1.jpg",
+    images: ["intern1.jpg", "intern2.jpg", "intern3.jpg"],
+  },
+]
 
 const interests = [
   "Web Development", "Mobile App Development", "API Development", 
