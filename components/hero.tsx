@@ -42,9 +42,9 @@ export function Hero() {
             <span className="text-transparent" style={{ WebkitTextStroke: "1px #000" }}>JAN ARIETA</span>
           </motion.h1>
 
-          <motion.p variants={fadeInUp} className="text-base md:text-lg text-black/60 max-w-lg mx-auto lg:mx-0 mb-8 leading-relaxed">
-            Building <span className="text-black font-bold">scalable backend systems</span> and high-performance architectures that drive modern applications.
-          </motion.p>
+   <motion.p variants={fadeInUp} className="text-base md:text-lg text-black/60 max-w-lg mx-auto lg:mx-0 mb-8 leading-relaxed">
+  Backend-focused engineer specializing in RESTful APIs, query optimization, indexing strategies, Redis caching, and scalable system design.
+</motion.p>
 
           {/* CALL TO ACTION BUTTONS */}
           <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-8">
