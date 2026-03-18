@@ -43,6 +43,16 @@ export function Certifications() {
         "Government-issued certification for computer systems servicing competency",
     },
     {
+      title: "Ultimate SEO Course 2026: Beginner to Advanced SEO with AI",
+      issuer: "Udemy",
+      date: "March 18, 2026",
+      duration: "8.5 hours",
+      type: "Course Completion",
+      image: "/certifications/seo-course-2026-cert.jpg",
+      description:
+        "Comprehensive SEO training from beginner to advanced level, including AI-powered optimization techniques",
+    },
+    {
       title: "Data Analytics Masters 2025 - From Basics To Advanced",
       issuer: "Udemy",
       date: "Dec 23, 2025",
